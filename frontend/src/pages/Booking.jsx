@@ -9,6 +9,7 @@ import { useAvailability } from '../hooks/useAvailability';
 import { useBooking } from '../hooks/useBooking';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import toast from 'react-hot-toast';
 
 const Booking = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -30,7 +31,7 @@ const Booking = () => {
     try {
       await bookAppointment(formData);
     } catch (error) {
-      // Error is handled by the hook and displayed via toast if needed
+      toast.error(error.message || 'Ocurrió un error al reservar el turno');
       console.error(error);
     }
   };
